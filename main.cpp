@@ -6,16 +6,20 @@
 
 using namespace std;
 
-#define DEBUG(id, x) cout << Time << " : " << id << " : "<< x << endl
+const bool debug = false;
+
+#define DEBUG(id, x) if (debug) cout << Time << " : " << id << " : "<< x << endl
 
 
 long START = 0;
 long END = 24 * 60;
 
-long TRAINS_PER_HOUR = 20;
+double TRAINS_PER_HOUR = 15.32;                   // podla dat je priemer 15.32 vlaku za hodinu
+//double TRAINS_PER_HOUR = 30;
 long HOUR = 60;
 
-long TIME_ON_RAILWAY = 5.116;                     //podla dat je priemerny cas cakania na nastupisti 5:07 to je 5.116 min
+double TIME_ON_RAILWAY = 7.61666;                     //podla dat je priemerny cas cakania na nastupisti 7:37 to je 7.61666 min
+double FAST_TRAIN_PROBABILITY = 0.2486;           //podla dat je 24% pravdepodobnost ze vlak je rychlik
 
 long PEOPLE_COUNTER = 0;
 long TRAIN_COUNTER = 0;
@@ -148,7 +152,7 @@ try_again_train:
             if(!fast) {
                 train_queue.InsLast(this);
             } else {
-                train_queue.InsFirst(this);
+                train_queue.InsFirst(this);                 // fast train
             }
             Passivate();
             goto try_again_train;
@@ -186,7 +190,7 @@ public:
 
     void Behavior() {
         DEBUG('X', "TrainGenerator behavior");
-        Train * t = new Train(/*is fast?*/false, ++last_train_id);
+        Train * t = new Train(/*is fast?*/Random() < FAST_TRAIN_PROBABILITY, ++last_train_id);
         TRAIN_COUNTER++;
         t->Activate();
         this->Activate(Time + Exponential(HOUR / TRAINS_PER_HOUR));
