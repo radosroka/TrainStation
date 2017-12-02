@@ -15,6 +15,8 @@ long END = 24 * 60;
 long TRAINS_PER_HOUR = 20;
 long HOUR = 60;
 
+long TIME_ON_RAILWAY = 5.116;                     //podla dat je priemerny cas cakania na nastupisti 5:07 to je 5.116 min
+
 long PEOPLE_COUNTER = 0;
 long TRAIN_COUNTER = 0;
 long GOT_IN_COUNTER = 0;
@@ -153,8 +155,7 @@ try_again_train:
         }
 
         Seize(*rail[index]);
-        Wait(Exponential(10));
-
+        Wait(Exponential(TIME_ON_RAILWAY));
         Release(*rail[index]);
 
         for(auto passenger : passengers) {
