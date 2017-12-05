@@ -287,11 +287,17 @@ public:
 try_again_train:
 
         r = Random();
+        long hint = -1;
         for(long i = 0 ; i < NUM_OF_RAILS ; i++) {
             if (r <= railway_possibilities_CDF[i]) {
-                index = i;
-                goto sieze;
+                hint = i;
+                break;
             }
+        }
+
+        if(hint != -1 && !rail[hint]->Busy()) {
+            index = hint;
+            goto sieze;
         }
 
         for(long i = 0 ; i < NUM_OF_RAILS ; i++) {
@@ -310,6 +316,7 @@ try_again_train:
             Passivate();
             goto try_again_train;
         }
+
 sieze:
         Seize(*rail[index]);
         Wait(Exponential(TIME_ON_RAILWAY));
