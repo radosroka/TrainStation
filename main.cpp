@@ -108,10 +108,10 @@ double default_railway_probabilities[] = {
 long START_TIME = 0;
 long END_TIME = 24 * 60;
 
-const long NUM_OF_RAILS = 4;
+const long NUM_OF_RAILS = 6;
 const long NUM_OF_WINDOWS = 16;  // prepazok
 
-double TRAINS_PER_HOUR = 15.32;                   // podla dat je priemer 15.32 vlaku za hodinu
+double TRAINS_PER_HOUR = 27;                   // podla dat je priemer 15.32 vlaku za hodinu
 long HOUR = 60;
 
 double TIME_ON_RAILWAY = 7.61666;                     //podla dat je priemerny cas cakania na nastupisti 7:37 to je 7.61666 min
@@ -425,7 +425,7 @@ int main() {
 //                cout << "value is " << value << " " << railway_possibilities.size() << endl;
                 railway_possibilities.pop_back();
                 cout << railway_possibilities.size() << endl;
-                for (unsigned long j = 0 ; j < railway_possibilities.size() ; j++) {
+                for (long j = 0 ; j < railway_possibilities.size() ; j++) {
 //                    cout << "rv is " << railway_possibilities[j] << endl;
                     railway_possibilities[j] += value * railway_possibilities[j];
 //                    cout << "rv is " << railway_possibilities[j] << endl << endl;
@@ -436,7 +436,7 @@ int main() {
 
             for (long i = 0 ; i < diff ; i++){
                 double new_value = 0;
-                for (unsigned long j = 0 ; j < railway_possibilities.size() ; j++) {
+                for (long j = 0 ; j < railway_possibilities.size() ; j++) {
                     double tmp = railway_possibilities[j] * railway_possibilities[j];
                     railway_possibilities[j] -= tmp;
                     new_value += tmp;
