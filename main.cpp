@@ -2,7 +2,6 @@
 #include <vector>
 
 #include <math.h>
-
 #include <simlib.h>
 
 
@@ -13,11 +12,20 @@ const bool debug = false;
 #define DEBUG(id, x) if (debug) cout << Time << " : " << id << " : "<< x << endl
 
 
+#ifndef GENERAL_MODEL
+#define GENERAL_MODEL
+#endif // !GENERAL_MODEL
+
+
+#ifdef GENERAL_MODEL
+
 long START_TIME = 0;
 long END_TIME = 24 * 60;
 
+const long NUM_OF_RAILS = 10;
+const long NUM_OF_WINDOWS = 16;  // prepazok
+
 double TRAINS_PER_HOUR = 15.32;                   // podla dat je priemer 15.32 vlaku za hodinu
-//double TRAINS_PER_HOUR = 30;
 long HOUR = 60;
 
 double TIME_ON_RAILWAY = 7.61666;                     //podla dat je priemerny cas cakania na nastupisti 7:37 to je 7.61666 min
@@ -25,30 +33,33 @@ double FAST_TRAIN_PROBABILITY = 0.2486;               //podla dat je 24% pravdep
 
 double DELAY_PROBABILITY = 0.086;                     //pravdepodobnost meskania vlaku je cca 8%
 
-double delay_table [] = {  // CDF
-    0.54375,    //5 min
-    0.775,      //10 min
-    0.85,       //15 min
-    0.90625,    //20 min
-    0.9375,     //25 min
-    0.96875,    //30 min
-    0.98125,    //35 min
-    0.9875,     //40 min
-    0.99375,    //45 min
+double delay_table[] = {  // CDF
+	0.54375,    //5 min
+	0.775,      //10 min
+	0.85,       //15 min
+	0.90625,    //20 min
+	0.9375,     //25 min
+	0.96875,    //30 min
+	0.98125,    //35 min
+	0.9875,     //40 min
+	0.99375,    //45 min
 };
 
-double default_railway_probabilities [] = {
-    0.1663974152,
-    0.1615508885,
-    0.169628433,
-    0.1227786753,
-    0.1195476575,
-    0.1373182553,
-    0.02746365105,
-    0.02261712439,
-    0.03554119548,
-    0.03715670436
+double default_railway_probabilities[] = {
+	0.1663974152,
+	0.1615508885,
+	0.169628433,
+	0.1227786753,
+	0.1195476575,
+	0.1373182553,
+	0.02746365105,
+	0.02261712439,
+	0.03554119548,
+	0.03715670436
 };
+
+#endif
+
 
 vector<double> railway_possibilities;
 vector<double> railway_possibilities_CDF;
@@ -57,12 +68,7 @@ long PEOPLE_COUNTER = 0;
 long TRAIN_COUNTER = 0;
 long GOT_IN_COUNTER = 0;
 
-
-const long NUM_OF_WINDOWS = 16;  // prepazok
 Facility * window[NUM_OF_WINDOWS];
-
-
-const long NUM_OF_RAILS = 10;
 Facility * rail[NUM_OF_RAILS];
 Queue train_queue("Train Queue");
 
