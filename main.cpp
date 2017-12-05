@@ -13,8 +13,8 @@ const bool debug = false;
 #define DEBUG(id, x) if (debug) cout << Time << " : " << id << " : "<< x << endl
 
 
-long START = 0;
-long END = 24 * 60;
+long START_TIME = 0;
+long END_TIME = 24 * 60;
 
 double TRAINS_PER_HOUR = 15.32;                   // podla dat je priemer 15.32 vlaku za hodinu
 //double TRAINS_PER_HOUR = 30;
@@ -337,7 +337,7 @@ next:
 
     RandomSeed(time(0));
 
-    Init(START, END);
+    Init(START_TIME, END_TIME);
 
     (new TrainGenerator)->Activate();
     Run();
