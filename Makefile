@@ -1,6 +1,6 @@
 CXX = g++
 CXXFAGS = -std=c++11 -Wall -Wextra -pedantic -O0 -g
-LDFLAGS = -lsimlib
+LDFLAGS = -lsimlib -lm
 LINK.o = $(LINK.cpp)
 
 PROGRAM = main
