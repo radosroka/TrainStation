@@ -62,7 +62,7 @@ const long NUM_OF_WINDOWS = 16;  // prepazok
 Facility * window[NUM_OF_WINDOWS];
 
 
-const long NUM_OF_RAILS = 7;
+const long NUM_OF_RAILS = 10;
 Facility * rail[NUM_OF_RAILS];
 Queue train_queue("Train Queue");
 
@@ -257,6 +257,13 @@ public:
 
 int main() {
 
+    double sum = 0;
+    if (NUM_OF_RAILS == 1) {
+        sum = 1;
+        railway_possibilities_CDF.push_back(sum);
+        goto next;
+    }
+
     if ((sizeof(default_railway_probabilities) / sizeof(double)) == NUM_OF_RAILS) {
         railway_possibilities.assign(default_railway_probabilities, default_railway_probabilities + (sizeof(default_railway_probabilities) / sizeof(double)));
     } else {
@@ -298,11 +305,12 @@ int main() {
         }
     }
 
-    double sum = 0;
     for(long i = 0 ; i < NUM_OF_RAILS ; i++) {
         sum += railway_possibilities[i];
         railway_possibilities_CDF.push_back(sum);
     }
+
+next:
 
     // double sum = 0;
     // for (long i = 0 ; i < NUM_OF_RAILS ; i++){
