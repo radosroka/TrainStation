@@ -387,7 +387,7 @@ int main() {
 //                cout << "value is " << value << " " << railway_possibilities.size() << endl;
                 railway_possibilities.pop_back();
                 cout << railway_possibilities.size() << endl;
-                for (long j = 0 ; j < railway_possibilities.size() ; j++) {
+                for (unsigned long j = 0 ; j < railway_possibilities.size() ; j++) {
 //                    cout << "rv is " << railway_possibilities[j] << endl;
                     railway_possibilities[j] += value * railway_possibilities[j];
 //                    cout << "rv is " << railway_possibilities[j] << endl << endl;
@@ -398,7 +398,7 @@ int main() {
 
             for (long i = 0 ; i < diff ; i++){
                 double new_value = 0;
-                for (long j = 0 ; j < railway_possibilities.size() ; j++) {
+                for (unsigned long j = 0 ; j < railway_possibilities.size() ; j++) {
                     double tmp = railway_possibilities[j] * railway_possibilities[j];
                     railway_possibilities[j] -= tmp;
                     new_value += tmp;
