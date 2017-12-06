@@ -4,7 +4,7 @@ LDFLAGS = -lsimlib -lm
 LINK.o = $(LINK.cpp)
 
 PROGRAM = main
-EXPERIMENTS = exp1 exp2 exp3 exp4
+EXPERIMENTS = exp1 exp2 exp3 exp4 exp5
 
 default: $(PROGRAM) $(EXPERIMENTS)
 
