@@ -6,7 +6,7 @@ LINK.o = $(LINK.cpp)
 PROGRAM = main
 EXPERIMENTS = exp1 exp2 exp3 exp4
 
-default = $(PROGRAM) $(EXPERIMENTS)
+default: $(PROGRAM) $(EXPERIMENTS)
 
 $(PROGRAM): $(PROGRAM).o
 
